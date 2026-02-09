@@ -1,5 +1,5 @@
 const LoginPage = require("../../pageObjects/loginPage");
-const users = require("../data/users");
+const users = require("../data/authentication/users");
 
 describe("Authentication - predefined users access rules", () => {
   Object.entries(users).forEach(([userKey, user]) => {

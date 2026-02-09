@@ -1,5 +1,5 @@
 const LoginPage = require('../../pageObjects/loginPage');
-const { standardUser, lockedUser } = require('../data/users');
+const { standardUser, lockedUser } = require('../data/authentication/users');
 
 describe('Authentication', () => {
 

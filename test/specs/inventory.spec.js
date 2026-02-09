@@ -1,6 +1,6 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
-const { standardUser } = require("../data/users");
+const { standardUser } = require("../data/authentication/users");
 
 describe("Inventory - products basic flow", () => {
   beforeEach(async () => {
