@@ -1,25 +1,30 @@
-const BasePage = require('./basePage');
+const BasePage = require("./basePage");
 
 class LoginPage extends BasePage {
-
   get usernameInput() {
-    return $('#user-name');
+    return $("#user-name");
   }
 
   get passwordInput() {
-    return $('#password');
+    return $("#password");
   }
 
   get loginButton() {
-    return $('#login-button');
+    return $("#login-button");
   }
 
   get errorMessage() {
     return $('[data-test="error"]');
   }
 
+  get lockedOutErrorMessage() {
+    return $(
+      "//h3[contains(text(),'Epic sadface: Sorry, this user has been locked out')]",
+    );
+  }
+
   async open() {
-    await super.open('/');
+    await super.open("/");
   }
 
   async login(username, password) {
@@ -27,7 +32,6 @@ class LoginPage extends BasePage {
     await this.passwordInput.setValue(password);
     await this.loginButton.click();
   }
-
 }
 
 module.exports = new LoginPage();

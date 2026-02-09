@@ -15,7 +15,7 @@ describe('Authentication', () => {
 
   it('Should show error for locked user', async () => {
     await LoginPage.login(lockedUser.username, lockedUser.password);
-    await expect(LoginPage.errorMessage).toBeDisplayed();
+    await expect(LoginPage.lockedOutErrorMessage).toBeDisplayed();
   });
 
 });
