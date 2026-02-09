@@ -7,13 +7,13 @@ describe('Authentication', () => {
     await LoginPage.open();
   });
 
-  it('should login successfully with valid credentials', async () => {
+  it('Should login successfully with valid credentials', async () => {
     await LoginPage.login(standardUser.username, standardUser.password);
     const url = await browser.getUrl();
     expect(url).toContain('inventory');
   });
 
-  it('should show error for locked user', async () => {
+  it('Should show error for locked user', async () => {
     await LoginPage.login(lockedUser.username, lockedUser.password);
     await expect(LoginPage.errorMessage).toBeDisplayed();
   });
