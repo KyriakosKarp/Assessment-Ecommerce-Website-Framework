@@ -17,15 +17,37 @@ class CartPage extends BasePage {
     return $(".shopping_cart_badge");
   }
 
+  get checkoutButton() {
+    return $("#checkout");
+  }
+
+  get continueShoppingButton() {
+    return $("#continue-shopping");
+  }
+
+  get continueShoppingButton() {
+    return $("#continue-shopping");
+  }
+
+  async continueShopping() {
+    await this.continueShoppingButton.click();
+  }
+
   async open() {
     await super.open("/cart.html");
   }
 
-  async removeFirstItem() {
+  async removeItemByIndex(index) {
     const buttons = await this.removeButtons;
-    if (buttons.length > 0) {
-      await buttons[0].click();
-    }
+    await buttons[index].click();
+  }
+
+  async proceedToCheckout() {
+    await this.checkoutButton.click();
+  }
+
+  async continueShopping() {
+    await this.continueShoppingButton.click();
   }
 }
 
