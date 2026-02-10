@@ -1,32 +1,41 @@
-module.exports = {
+const users = {
   standardUser: {
     username: "standard_user",
     password: "secret_sauce",
-    canLogin: true,
+    shouldLogin: true,
+    description: "standard user",
   },
   lockedUser: {
     username: "locked_out_user",
     password: "secret_sauce",
-    canLogin: false,
+    shouldLogin: false,
+    description: "locked out user",
+    expectedError: "Epic sadface: Sorry, this user has been locked out.",
   },
   problemUser: {
     username: "problem_user",
     password: "secret_sauce",
-    canLogin: true,
+    shouldLogin: true,
+    description: "problem user",
   },
   performanceUser: {
     username: "performance_glitch_user",
     password: "secret_sauce",
-    canLogin: true,
+    shouldLogin: true,
+    description: "performance glitch user",
   },
   errorUser: {
     username: "error_user",
     password: "secret_sauce",
-    canLogin: true,
+    shouldLogin: true,
+    description: "error user",
   },
   visualUser: {
     username: "visual_user",
     password: "secret_sauce",
-    canLogin: true,
+    shouldLogin: true,
+    description: "visual user",
   },
 };
+
+module.exports = { users };
