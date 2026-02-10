@@ -1,21 +1,53 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
-const { standardUser } = require("../data/authentication/users");
+const CartPage = require("../../pageObjects/cartPage");
+const { standardUser } = require("../data/authentication/users").users;
 
-describe("Inventory - products basic flow", () => {
+describe("Inventory page", () => {
   beforeEach(async () => {
     await LoginPage.open();
     await LoginPage.login(standardUser.username, standardUser.password);
+
+    const url = await browser.getUrl();
+    expect(url).toContain("inventory");
   });
 
-  it("Should display products after login", async () => {
+  it("Should display products on inventory page", async () => {
     const items = await InventoryPage.inventoryItems;
     expect(items.length).toBeGreaterThan(0);
   });
 
-  it("Should add product to cart", async () => {
-    await InventoryPage.addFirstItemToCart();
-    await expect(InventoryPage.cartBadge).toBeDisplayed();
-    await expect(InventoryPage.cartBadge).toHaveText("1");
+  it("Should sort products alphabetically from A to Z", async () => {
+    await InventoryPage.sortByNameAToZ();
+
+    const names = await InventoryPage.getItemNames();
+    const sorted = [...names].sort();
+
+    expect(names).toEqual(sorted);
+  });
+
+  it("Should sort products by price from low to high", async () => {
+    await InventoryPage.sortByPriceLowToHigh();
+
+    const prices = await InventoryPage.getItemPrices();
+    const sorted = [...prices].sort((a, b) => a - b);
+
+    expect(prices).toEqual(sorted);
+  });
+
+  it("Should sort products by price from high to low", async () => {
+    await InventoryPage.sortByPriceHighToLow();
+
+    const prices = await InventoryPage.getItemPrices();
+    const sorted = [...prices].sort((a, b) => b - a);
+
+    expect(prices).toEqual(sorted);
+  });
+
+  it("Should add a product to the cart from inventory", async () => {
+    await InventoryPage.addItemToCart();
+
+    await expect(CartPage.cartBadge).toBeDisplayed();
+    await expect(CartPage.cartBadge).toHaveText("1");
   });
 });

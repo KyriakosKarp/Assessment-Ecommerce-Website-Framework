@@ -1,16 +1,16 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
-const CartPage = require("../../pageObjects/cartPage");
+const CartPage = require("../../pageObjects/cartPage")
 const CheckoutPage = require("../../pageObjects/checkoutPage");
 const invalidCheckoutData = require("../data/checkout/invalidCheckoutData");
-const { standardUser } = require("../data/authentication/users");
+const { users } = require("../data/authentication/users");
 
 describe("Checkout - happy path", () => {
   before(async () => {
     await LoginPage.open();
-    await LoginPage.login(standardUser.username, standardUser.password);
+    await LoginPage.login(users.standardUser.username, users.standardUser.password);
 
-    await InventoryPage.addFirstItemToCart();
+    await InventoryPage.addItemToCart();
     await CartPage.cartButton.click();
 
     await CheckoutPage.startCheckout();
@@ -39,9 +39,9 @@ describe("Checkout - happy path", () => {
 describe("Checkout - negative scenarios", () => {
   beforeEach(async () => {
     await LoginPage.open();
-    await LoginPage.login(standardUser.username, standardUser.password);
+    await LoginPage.login(users.standardUser.username, users.standardUser.password);
 
-    await InventoryPage.addFirstItemToCart();
+    await InventoryPage.addItemToCart();
     await CartPage.cartButton.click();
     await CheckoutPage.startCheckout();
   });

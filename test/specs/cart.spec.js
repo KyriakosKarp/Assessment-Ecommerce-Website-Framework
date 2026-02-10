@@ -1,13 +1,13 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
 const CartPage = require("../../pageObjects/cartPage");
-const { standardUser } = require("../data/authentication/users")
+const { users } = require("../data/authentication/users")
 
 describe("Cart - add and remove item flow", () => {
   beforeEach(async () => {
     await LoginPage.open();
-    await LoginPage.login(standardUser.username, standardUser.password);
-    await InventoryPage.addFirstItemToCart();
+    await LoginPage.login(users.standardUser.username, users.standardUser.password);
+    await InventoryPage.addItemToCart();
     await CartPage.open();
   });
 
