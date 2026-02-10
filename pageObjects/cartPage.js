@@ -13,6 +13,10 @@ class CartPage extends BasePage {
     return $(".shopping_cart_link");
   }
 
+  get cartBadge() {
+    return $(".shopping_cart_badge");
+  }
+
   async open() {
     await super.open("/cart.html");
   }
