@@ -37,7 +37,9 @@ class BurgerMenu {
       async () => {
         const items = await this.menuItems;
         if (items.length === 0) return false;
-        return await items[0].isDisplayed();
+        
+        const text =await items[0].getText();
+        return text.trim().length > 0;
       },
       {
         timeout: 5000,
