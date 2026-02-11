@@ -7,8 +7,12 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "wdio": "wdio run ./wdio.conf.js"
+    "regression": "wdio run ./wdio.conf.js",
+    "test:auth": "wdio run ./wdio.conf.js --spec ./test/specs/auth.spec.js",
+    "test:burger": "wdio run ./wdio.conf.js --spec ./test/specs/burgerMenu.spec.js",
+    "test:cart": "wdio run ./wdio.conf.js --spec ./test/specs/cart.spec.js",
+    "test:checkout": "wdio run ./wdio.conf.js --spec ./test/specs/checkout.spec.js",
+    "test:inventory": "wdio run ./wdio.conf.js --spec ./test/specs/inventory.spec.js"
   },
   "devDependencies": {
     "@wdio/cli": "^9.23.3",

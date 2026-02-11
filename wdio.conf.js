@@ -1,7 +1,7 @@
 exports.config = {
   runner: "local",
 
-  specs: ["./test/specs/**/*.spec.js"],
+  specs: ["./test/specs/**/cart.spec.js"],
 
   maxInstances: 1,
 
@@ -10,7 +10,12 @@ exports.config = {
       browserName: "chrome",
       "goog:chromeOptions": {
         // Fixed viewport for deterministic UI behavior across environments
-        args: ["--window-size=1920,1080"],
+        args: [
+          "--headless,",
+          "--no-sandbox",
+          "--disable-dev-shm-usage",
+          "--window-size=1920,1080",
+        ],
       },
     },
   ],
