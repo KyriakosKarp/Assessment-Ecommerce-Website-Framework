@@ -36,3 +36,21 @@ jobs:
         with:
           name: error-screenshots
           path: ./errorShots
+
+      - name: Generate Allure report
+        if: always()
+        run: npm run report:generate
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report        
