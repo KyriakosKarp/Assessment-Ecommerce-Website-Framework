@@ -92,6 +92,17 @@ Authentication and checkout negative scenarios use data-driven patterns to:
 
 Due to application behavior where **Reset App State does not revert inventory button states**, a clearCart()) strategy was implemented to ensure test isolation and deterministic execution.
 
+### Item Details Flow
+
+This test validates:
+- Data consistency between inventory and item details pages
+- UI state mutation after cart interaction
+- Cart badge synchronization
+- Browser-level back navigation state persistence
+- Cross-page data integrity
+
+The goal was to validate behavioral integrity across navigation layers rather than isolated UI checks.
+
 ---
 
 ## Edge Case Coverage
@@ -133,6 +144,8 @@ Handled via explicit cart cleanup logic to prevent state leakage between tests.
 | Checkout | ✅ |
 | Burger Menu | ✅ |
 | Edge Cases | ✅ |
+| Item Details | ✅ |
+| State persistence & cross-page validation | ✅ |
 
 ---
 
@@ -145,6 +158,7 @@ test/
 │    ├── cart.spec.js
 │    ├── checkout.spec.js
 │    └── burgerMenu.spec.js
+│    └── itemDetails.spec.js
 │
 └── data/
 ├── authentication/

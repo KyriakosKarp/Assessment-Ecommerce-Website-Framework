@@ -20,6 +20,14 @@ class CartPage extends BasePage {
     return $("#continue-shopping");
   }
 
+  get cartItemTitles() {
+    return $$(".inventory_item_name");
+  }
+
+  get cartItemPrices() {
+    return $$(".inventory_item_price");
+  }
+
   // -------- Actions --------
 
   async removeItemByIndex(index) {
@@ -40,6 +48,17 @@ class CartPage extends BasePage {
 
   async continueShopping() {
     await this.continueShoppingButton.click();
+  }
+
+  async getFirstItemTitle() {
+    const items = await this.cartItemTitles;
+    return await items[0].getText();
+  }
+
+  async getFirstItemPrice() {
+    const prices = await this.cartItemPrices;
+    const text = await prices[0].getText();
+    return parseFloat(text.replace("$", ""));
   }
 }
 

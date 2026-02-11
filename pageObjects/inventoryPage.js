@@ -29,6 +29,18 @@ class InventoryPage extends BasePage {
     return Header.cartBadge;
   }
 
+  get itemTitleLinks() {
+    return $$(".inventory_item_name");
+  }
+
+  get itemImages() {
+    return $$(".inventory_item_img a");
+  }
+
+  get cartBadge() {
+    return Header.cartBadge;
+  }
+
   // -------- Cart Actions --------
 
   async addItemToCart(index = 0) {
@@ -48,6 +60,20 @@ class InventoryPage extends BasePage {
       await buttons[0].click();
       buttons = await CartPage.removeButtons;
     }
+  }
+
+  async clickFirstItem() {
+    const items = await this.itemTitleLinks;
+    await items[0].click();
+  }
+
+  async clickFirstItemImage() {
+    const images = await this.itemImages;
+    await images[0].click();
+  }
+
+  async goToCart() {
+    await Header.goToCart();
   }
 
   // -------- Sorting --------
@@ -87,6 +113,15 @@ class InventoryPage extends BasePage {
     }
 
     return prices;
+  }
+
+  async getCartItemCount() {
+    if (!(await this.cartBadge.isExisting())) {
+      return 0;
+    }
+
+    const text = await this.cartBadge.getText();
+    return parseInt(text, 10);
   }
 }
 
