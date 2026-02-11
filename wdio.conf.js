@@ -1,7 +1,8 @@
 exports.config = {
   runner: "local",
+  automationProtocol: "webdriver",
 
-  specs: ["./test/specs/**/cart.spec.js"],
+  specs: ["./test/specs/**/*.spec.js"],
 
   maxInstances: 1,
 
@@ -11,9 +12,10 @@ exports.config = {
       "goog:chromeOptions": {
         // Fixed viewport for deterministic UI behavior across environments
         args: [
-          "--headless,",
+          "--headless=new",
           "--no-sandbox",
           "--disable-dev-shm-usage",
+          "--disable-gpu",
           "--window-size=1920,1080",
         ],
       },
@@ -39,7 +41,7 @@ exports.config = {
 
   afterTest: async function (test, context, { error }) {
     if (error) {
-      await browser.takeScreenshot();
+      await browser.saveScreenshot(`./errorShots/${Date.now()}.png`);
     }
   },
 };

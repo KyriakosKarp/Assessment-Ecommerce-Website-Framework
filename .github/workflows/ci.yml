@@ -28,4 +28,11 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run WebdriverIO tests
-        run: npm run regression
+        run: npm run test:all
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-screenshots
+          path: ./errorShots

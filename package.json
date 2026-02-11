@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "regression": "wdio run ./wdio.conf.js",
+    "test:all": "wdio run ./wdio.conf.js",
     "test:auth": "wdio run ./wdio.conf.js --spec ./test/specs/auth.spec.js",
     "test:burger": "wdio run ./wdio.conf.js --spec ./test/specs/burgerMenu.spec.js",
     "test:cart": "wdio run ./wdio.conf.js --spec ./test/specs/cart.spec.js",
