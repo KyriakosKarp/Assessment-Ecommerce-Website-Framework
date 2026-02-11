@@ -1,6 +1,9 @@
 const BasePage = require("./basePage");
+const Header = require("./components/header.comp");
 
 class InventoryPage extends BasePage {
+  // -------- Selectors --------
+
   get inventoryItems() {
     return $$(".inventory_item");
   }
@@ -17,10 +20,31 @@ class InventoryPage extends BasePage {
     return $$(".inventory_item_price");
   }
 
-  // Uses .btn_inventory as it covers both Add and Remove states
   get addToCartButtons() {
     return $$(".btn_inventory");
   }
+
+  get cartBadge() {
+    return Header.cartBadge;
+  }
+
+  // -------- Cart Actions --------
+
+  async addItemToCart(index = 0) {
+    const buttons = await this.addToCartButtons;
+
+    if (!buttons[index]) {
+      throw new Error(`Add to cart button at index ${index} not found`);
+    }
+
+    await buttons[index].click();
+  }
+
+  async goToCart() {
+    await Header.goToCart();
+  }
+
+  // -------- Sorting --------
 
   async sortByNameAToZ() {
     await this.sortDropdown.selectByVisibleText("Name (A to Z)");
@@ -34,28 +58,29 @@ class InventoryPage extends BasePage {
     await this.sortDropdown.selectByVisibleText("Price (high to low)");
   }
 
+  // -------- Data Extraction --------
+
   async getItemNames() {
+    const elements = await this.itemNamesElements;
     const names = [];
-    for (const el of await this.itemNamesElements) {
+
+    for (const el of elements) {
       names.push(await el.getText());
     }
+
     return names;
   }
 
   async getItemPrices() {
+    const elements = await this.itemPriceElements;
     const prices = [];
-    for (const el of await this.itemPriceElements) {
-      const text = await el.getText(); // "$29.99"
+
+    for (const el of elements) {
+      const text = await el.getText();
       prices.push(parseFloat(text.replace("$", "")));
     }
-    return prices;
-  }
 
-  // Adds item to cart by index.
-  // Defaults to index 0 to keep tests concise for single-item scenarios.
-  async addItemToCart(index = 0) {
-    const buttons = await this.addToCartButtons;
-    await buttons[index].click();
+    return prices;
   }
 }
 

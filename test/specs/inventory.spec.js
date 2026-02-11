@@ -1,6 +1,7 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
 const CartPage = require("../../pageObjects/cartPage");
+const Header = require("../../pageObjects/components/header.comp");
 const { standardUser } = require("../data/authentication/users").users;
 
 describe("Inventory page", () => {
@@ -47,7 +48,7 @@ describe("Inventory page", () => {
   it("Should add a product to the cart from inventory", async () => {
     await InventoryPage.addItemToCart();
 
-    await expect(CartPage.cartBadge).toBeDisplayed();
-    await expect(CartPage.cartBadge).toHaveText("1");
+    await expect(Header.cartBadge).toBeDisplayed();
+    await expect(Header.cartBadge).toHaveText("1");
   });
 });

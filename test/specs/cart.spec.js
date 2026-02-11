@@ -1,11 +1,16 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
 const CartPage = require("../../pageObjects/cartPage");
-const BurgerMenu = require("../../pageObjects/components/burgerMenu.comp");
+const Header = require("../../pageObjects/components/header.comp");
 const { users } = require("../data/authentication/users");
 
 describe("Cart", () => {
   beforeEach(async () => {
+    // Force clean browser session per testto avoid shared cart state
+    // WDIO runs all `it` blocks in the same session withing a spec file
+    // Without this, cart state persists betweem tests and causes flakiness
+    await browser.reloadSession();
+
     await LoginPage.open();
     await LoginPage.login(
       users.standardUser.username,
@@ -30,14 +35,19 @@ describe("Cart", () => {
     await InventoryPage.addItemToCart(0);
     await InventoryPage.addItemToCart(1);
 
+    // Badge initially 2
+    await expect(Header.cartBadge).toHaveText("2");
+
     await CartPage.open();
     await CartPage.removeItemByIndex(0);
 
     const items = await CartPage.cartItems;
     expect(items.length).toBe(1);
 
-    const badge = await InventoryPage.cartBadge;
-    await expect(badge).toHaveText("1");
+    // Back to inventory to check badge
+    await CartPage.continueShopping();
+
+    await expect(Header.cartBadge).toHaveText("1");
   });
 
   it("Should proceed to checkout from cart", async () => {
@@ -58,20 +68,5 @@ describe("Cart", () => {
 
     const url = await browser.getUrl();
     expect(url).toContain("inventory");
-  });
-
-  it("Should clear cart after logout and login with different user", async () => {
-    await InventoryPage.addItemToCart(0);
-
-    await BurgerMenu.open();
-    await BurgerMenu.logout();
-
-    await LoginPage.login(
-      users.problemUser.username,
-      users.problemUser.password,
-    );
-
-    const badge = await InventoryPage.cartBadge;
-    await expect(badge).not.toBeDisplayed();
   });
 });

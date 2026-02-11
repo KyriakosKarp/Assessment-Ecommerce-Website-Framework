@@ -20,7 +20,6 @@ describe("Burger Menu", () => {
     await BurgerMenu.open();
 
     const items = await BurgerMenu.getMenuItemsText();
-    console.log("~~~~~~~~~~ items are:", items)
     expect(items).toEqual(["All Items", "About", "Logout", "Reset App State"]);
 
     await BurgerMenu.close();

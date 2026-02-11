@@ -1,20 +1,15 @@
 const BasePage = require("./basePage");
+const Header = require("./components/header.comp");
 
 class CartPage extends BasePage {
+  // -------- Selectors --------
+
   get cartItems() {
     return $$(".cart_item");
   }
 
   get removeButtons() {
-    return $$(".cart_item button");
-  }
-
-  get cartButton() {
-    return $(".shopping_cart_link");
-  }
-
-  get cartBadge() {
-    return $(".shopping_cart_badge");
+    return $$('button[data-test^="remove-"]');
   }
 
   get checkoutButton() {
@@ -25,20 +20,24 @@ class CartPage extends BasePage {
     return $("#continue-shopping");
   }
 
-  get continueShoppingButton() {
-    return $("#continue-shopping");
-  }
-
-  async continueShopping() {
-    await this.continueShoppingButton.click();
-  }
+  // -------- Navigation --------
 
   async open() {
-    await super.open("/cart.html");
+    await Header.goToCart();
+    await this.checkoutButton.waitForDisplayed();
   }
 
+  // -------- Actions --------
+
   async removeItemByIndex(index) {
-    const buttons = await this.removeButtons;
+    const buttons = this.removeButtons;
+
+    if (!buttons[index]) {
+      throw new Error(
+        `Remove button at index ${index} not found. Available buttons: ${buttons.length}`,
+      );
+    }
+
     await buttons[index].click();
   }
 
