@@ -22,14 +22,7 @@ describe("Burger Menu", () => {
     await BurgerMenu.open();
 
     const items = await BurgerMenu.getMenuItemsText();
-    expect(items).toEqual(
-      expect.arrayContaining([
-        "All Items",
-        "About",
-        "Logout",
-        "Reset App State",
-      ]),
-    );
+    expect(items).toEqual(["All Items", "About", "Logout", "Reset App State"]);
 
     await BurgerMenu.close();
   });
