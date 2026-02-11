@@ -34,9 +34,11 @@ class BurgerMenu {
     // We explicitly wait for at least one menu item to be visible to avoid
     // reading empty text values before the animation completes.
     await browser.waitUntil(
-      async () =>
-        (await this.menuItems.length) > 0 &&
-        (await this.menuItems[0].isDisplayed()),
+      async () => {
+        const items = await this.menuItems;
+        if (items.length === 0) return false;
+        return await items[0].isDisplayed();
+      },
       {
         timeout: 5000,
         timeoutMsg: "Burger menu did not open correctly",
@@ -49,14 +51,10 @@ class BurgerMenu {
   }
 
   async getMenuItemsText() {
-    const elements = await this.menuItems;
     const texts = [];
 
-    for (const el of elements) {
-      const text = (await el.getText()).trim();
-      if (text.length > 0) {
-        texts.push(text);
-      }
+    for (const item of await this.menuItems) {
+      texts.push((await item.getText()).trim());
     }
     return texts;
   }

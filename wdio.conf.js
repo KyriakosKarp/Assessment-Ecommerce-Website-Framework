@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 exports.config = {
   runner: "local",
   automationProtocol: "webdriver",
@@ -41,6 +44,11 @@ exports.config = {
 
   afterTest: async function (test, context, { error }) {
     if (error) {
+      const dir = path.join(__dirname, "errorShots");
+
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
       await browser.saveScreenshot(`./errorShots/${Date.now()}.png`);
     }
   },
