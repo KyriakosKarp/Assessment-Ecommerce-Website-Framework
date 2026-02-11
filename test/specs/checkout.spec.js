@@ -2,18 +2,17 @@ const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
 const Header = require("../../pageObjects/components/header.comp");
 const CheckoutPage = require("../../pageObjects/checkoutPage");
-const CartPage = require("../../pageObjects/cartPage");
 const invalidCheckoutData = require("../data/checkout/invalidCheckoutData");
 const { users } = require("../data/authentication/users");
 
 describe("Checkout - happy path", () => {
-  before(async () => {
+  beforeEach(async () => {
     await LoginPage.open();
     await LoginPage.login(
       users.standardUser.username,
       users.standardUser.password,
     );
-    await CartPage.clearCart();
+    await InventoryPage.clearCart();
 
     await InventoryPage.addItemToCart();
     await Header.goToCart();
@@ -48,7 +47,7 @@ describe("Checkout - negative scenarios", () => {
       users.standardUser.username,
       users.standardUser.password,
     );
-    await CartPage.clearCart();
+    await InventoryPage.clearCart();
 
     await InventoryPage.addItemToCart();
     await Header.goToCart();

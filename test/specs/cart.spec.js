@@ -15,14 +15,14 @@ describe("Cart", () => {
     const url = await browser.getUrl();
     expect(url).toContain("inventory");
 
-    await CartPage.clearCart();
+    await InventoryPage.clearCart();
   });
 
   it("Should add multiple items to the cart", async () => {
     await InventoryPage.addItemToCart(0);
     await InventoryPage.addItemToCart(1);
 
-    await CartPage.open();
+    await Header.goToCart();
 
     const items = await CartPage.cartItems;
     expect(items.length).toBe(2);
@@ -35,7 +35,7 @@ describe("Cart", () => {
     // Badge initially 2
     await expect(Header.cartBadge).toHaveText("2");
 
-    await CartPage.open();
+    await Header.goToCart();
     await CartPage.removeItemByIndex(0);
 
     const items = await CartPage.cartItems;
@@ -49,7 +49,7 @@ describe("Cart", () => {
 
   it("Should proceed to checkout from cart", async () => {
     await InventoryPage.addItemToCart(0);
-    await CartPage.open();
+    await Header.goToCart();
 
     await CartPage.proceedToCheckout();
 
@@ -59,7 +59,7 @@ describe("Cart", () => {
 
   it("Should continue shopping from cart", async () => {
     await InventoryPage.addItemToCart(0);
-    await CartPage.open();
+    await Header.goToCart();
 
     await CartPage.continueShopping();
 

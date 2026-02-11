@@ -1,5 +1,6 @@
 const BasePage = require("./basePage");
 const Header = require("./components/header.comp");
+const CartPage = require("./cartPage");
 
 class InventoryPage extends BasePage {
   // -------- Selectors --------
@@ -20,7 +21,7 @@ class InventoryPage extends BasePage {
     return $$(".inventory_item_price");
   }
 
-  get addToCartButtons() {
+  get inventoryButtons() {
     return $$(".btn_inventory");
   }
 
@@ -31,7 +32,7 @@ class InventoryPage extends BasePage {
   // -------- Cart Actions --------
 
   async addItemToCart(index = 0) {
-    const buttons = await this.addToCartButtons;
+    const buttons = await this.inventoryButtons;
 
     if (!buttons[index]) {
       throw new Error(`Add to cart button at index ${index} not found`);
@@ -40,8 +41,13 @@ class InventoryPage extends BasePage {
     await buttons[index].click();
   }
 
-  async goToCart() {
-    await Header.goToCart();
+  async clearCart() {
+    let buttons = await CartPage.removeButtons;
+
+    while (buttons.length > 0) {
+      await buttons[0].click();
+      buttons = await CartPage.removeButtons;
+    }
   }
 
   // -------- Sorting --------

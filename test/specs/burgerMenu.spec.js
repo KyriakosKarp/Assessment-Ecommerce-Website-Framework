@@ -15,7 +15,7 @@ describe("Burger Menu", () => {
     const url = await browser.getUrl();
     expect(url).toContain("inventory");
 
-    await CartPage.clearCart();
+    await InventoryPage.clearCart();
   });
 
   it("Should open burger menu and display expected options", async () => {

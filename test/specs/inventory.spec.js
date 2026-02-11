@@ -1,6 +1,5 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
-const CartPage = require("../../pageObjects/cartPage");
 const Header = require("../../pageObjects/components/header.comp");
 const { standardUser } = require("../data/authentication/users").users;
 
@@ -8,7 +7,7 @@ describe("Inventory page", () => {
   beforeEach(async () => {
     await LoginPage.open();
     await LoginPage.login(standardUser.username, standardUser.password);
-    await CartPage.clearCart();
+    await InventoryPage.clearCart();
 
     const url = await browser.getUrl();
     expect(url).toContain("inventory");
