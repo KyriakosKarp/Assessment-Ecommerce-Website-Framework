@@ -49,9 +49,14 @@ class BurgerMenu {
   }
 
   async getMenuItemsText() {
+    const elements = await this.menuItems;
     const texts = [];
-    for (const item of await this.menuItems) {
-      texts.push((await item.getText()).trim());
+
+    for (const el of elements) {
+      const text = (await el.getText()).trim();
+      if (text.length > 0) {
+        texts.push(text);
+      }
     }
     return texts;
   }
