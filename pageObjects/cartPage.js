@@ -48,6 +48,16 @@ class CartPage extends BasePage {
   async continueShopping() {
     await this.continueShoppingButton.click();
   }
+
+  async clearCart() {
+    let buttons = await this.removeButtons;
+
+    while (buttons.length > 0) {
+      await buttons[0].click();
+      // buttons.splice(0, 1);
+      buttons = await this.removeButtons;
+    }
+  }
 }
 
 module.exports = new CartPage();

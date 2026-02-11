@@ -6,11 +6,6 @@ const { users } = require("../data/authentication/users");
 
 describe("Cart", () => {
   beforeEach(async () => {
-    // Force clean browser session per testto avoid shared cart state
-    // WDIO runs all `it` blocks in the same session withing a spec file
-    // Without this, cart state persists betweem tests and causes flakiness
-    await browser.reloadSession();
-
     await LoginPage.open();
     await LoginPage.login(
       users.standardUser.username,
@@ -19,6 +14,8 @@ describe("Cart", () => {
 
     const url = await browser.getUrl();
     expect(url).toContain("inventory");
+
+    await CartPage.clearCart();
   });
 
   it("Should add multiple items to the cart", async () => {

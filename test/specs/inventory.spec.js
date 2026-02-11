@@ -8,6 +8,7 @@ describe("Inventory page", () => {
   beforeEach(async () => {
     await LoginPage.open();
     await LoginPage.login(standardUser.username, standardUser.password);
+    await CartPage.clearCart();
 
     const url = await browser.getUrl();
     expect(url).toContain("inventory");
