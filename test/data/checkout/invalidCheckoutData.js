@@ -1,5 +1,12 @@
 const invalidCheckoutData = [
   {
+    scenario: "all fields are missing",
+    firstName: "",
+    lastName: "",
+    postalCode: "",
+    expectedError: "Error: First Name is required",
+  },
+  {
     scenario: "first name is missing",
     firstName: "",
     lastName: "Papa",

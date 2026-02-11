@@ -1,6 +1,7 @@
 const BasePage = require("./basePage");
 
 class CheckoutPage extends BasePage {
+  // ---------- STEP ONE ----------
   get checkoutButton() {
     return $("#checkout");
   }
@@ -21,23 +22,15 @@ class CheckoutPage extends BasePage {
     return $("#continue");
   }
 
-  get finishButton() {
-    return $("#finish");
-  }
-
-  get backHomeButton() {
-    return $("#back-to-products");
-  }
-
-  get completeHeader() {
-    return $(".complete-header");
+  get cancelButton() {
+    return $("#cancel");
   }
 
   get errorMessage() {
     return $('[data-test="error"]');
   }
 
-  async startCheckout() {
+  async proceedToCheckout() {
     await this.checkoutButton.click();
   }
 
@@ -48,8 +41,63 @@ class CheckoutPage extends BasePage {
     await this.continueButton.click();
   }
 
+  // ---------- OVERVIEW (STEP TWO) ----------
+
+  get finishButton() {
+    return $("#finish");
+  }
+
+  get summaryItemPrices() {
+    return $$(".inventory_item_price");
+  }
+
+  get summarySubtotal() {
+    return $(".summary_subtotal_label");
+  }
+
+  get summaryTax() {
+    return $(".summary_tax_label");
+  }
+
+  get summaryTotal() {
+    return $(".summary_total_label");
+  }
+
   async finishCheckout() {
     await this.finishButton.click();
+  }
+
+  async getItemPrices() {
+    const elements = await this.summaryItemPrices;
+
+    const prices = [];
+
+    for (const el of elements) {
+      const text = await el.getText(); // "$29.99"
+      prices.push(parseFloat(text.replace("$", "")));
+    }
+
+    return prices;
+  }
+
+  async getTax() {
+    const text = await this.summaryTax.getText(); // "Tax: $2.40"
+    return parseFloat(text.replace("Tax: $", ""));
+  }
+
+  async getTotal() {
+    const text = await this.summaryTotal.getText(); // "Total: $32.39"
+    return parseFloat(text.replace("Total: $", ""));
+  }
+
+  // ---------- COMPLETE PAGE ----------
+
+  get completeHeader() {
+    return $(".complete-header");
+  }
+
+  get backHomeButton() {
+    return $("#back-to-products");
   }
 }
 
