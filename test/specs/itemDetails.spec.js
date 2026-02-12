@@ -2,6 +2,7 @@ const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
 const ItemPage = require("../../pageObjects/itemPage");
 const CartPage = require("../../pageObjects/cartPage");
+const Header = require("../../pageObjects/components/header.comp");
 const { users } = require("../data/authentication/users");
 
 describe("Item Details - Cross Page State Consistency", () => {
@@ -57,7 +58,7 @@ describe("Item Details - Cross Page State Consistency", () => {
     expect(persistedCartCount).toBe(1);
 
     // Validate cart content consistency
-    await InventoryPage.goToCart();
+    await Header.goToCart();
 
     const cartItemTitle = await CartPage.getFirstItemTitle();
     const cartItemPrice = await CartPage.getFirstItemPrice();

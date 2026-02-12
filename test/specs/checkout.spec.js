@@ -2,6 +2,7 @@ const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
 const Header = require("../../pageObjects/components/header.comp");
 const CheckoutPage = require("../../pageObjects/checkoutPage");
+const CartPage = require("../../pageObjects/cartPage");
 const invalidCheckoutData = require("../data/checkout/invalidCheckoutData");
 const { users } = require("../data/authentication/users");
 
@@ -16,7 +17,7 @@ describe("Checkout Flow", () => {
     await InventoryPage.clearCart();
     await InventoryPage.addItemToCart();
     await Header.goToCart();
-    await CheckoutPage.proceedToCheckout();
+    await CartPage.proceedToCheckout();
   }
 
   async function completeValidCheckout() {

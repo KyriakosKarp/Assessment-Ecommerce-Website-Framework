@@ -25,20 +25,12 @@ class InventoryPage extends BasePage {
     return $$(".btn_inventory");
   }
 
-  get cartBadge() {
-    return Header.cartBadge;
-  }
-
   get itemTitleLinks() {
     return $$(".inventory_item_name");
   }
 
   get itemImages() {
     return $$(".inventory_item_img a");
-  }
-
-  get cartBadge() {
-    return Header.cartBadge;
   }
 
   // -------- Cart Actions --------
@@ -70,10 +62,6 @@ class InventoryPage extends BasePage {
   async clickFirstItemImage() {
     const images = await this.itemImages;
     await images[0].click();
-  }
-
-  async goToCart() {
-    await Header.goToCart();
   }
 
   // -------- Sorting --------
@@ -120,11 +108,11 @@ class InventoryPage extends BasePage {
   }
 
   async getCartItemCount() {
-    if (!(await this.cartBadge.isExisting())) {
+    if (!(await Header.cartBadge.isExisting())) {
       return 0;
     }
 
-    const text = await this.cartBadge.getText();
+    const text = await Header.cartBadge.getText();
     return parseInt(text, 10);
   }
 }

@@ -1,7 +1,7 @@
 const LoginPage = require("../../pageObjects/loginPage");
 const InventoryPage = require("../../pageObjects/inventoryPage");
 const BurgerMenu = require("../../pageObjects/components/burgerMenu.comp");
-const CartPage = require("../../pageObjects/cartPage");
+const Header = require("../../pageObjects/components/header.comp");
 const { users } = require("../data/authentication/users");
 
 describe("Burger Menu", () => {
@@ -56,6 +56,6 @@ describe("Burger Menu", () => {
     await BurgerMenu.open();
     await BurgerMenu.resetAppState();
 
-    await expect(CartPage.cartBadge).not.toBeDisplayed();
+    await expect(Header.cartBadge).not.toBeDisplayed();
   });
 });

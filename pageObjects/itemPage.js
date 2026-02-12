@@ -8,19 +8,11 @@ class ItemPage {
     return $(".inventory_details_price");
   }
 
-  get addToCartButton() {
-    return $("button.btn_primary, button.btn_inventory");
-  }
-
-  get removeButton() {
-    return $("button.btn_secondary");
-  }
-
   get backButton() {
     return $("#back-to-products");
   }
 
-  get addRemoveButton(){
+  get addRemoveButton() {
     return $(".btn_inventory");
   }
 
@@ -36,7 +28,7 @@ class ItemPage {
   }
 
   async addToCart() {
-    await this.addToCartButton.click();
+    await this.addRemoveButton.click();
   }
 
   async getAddRemoveButtonText() {

@@ -1,11 +1,6 @@
 const BasePage = require("./basePage");
 
 class CheckoutPage extends BasePage {
-  // ---------- STEP ONE ----------
-  get checkoutButton() {
-    return $("#checkout");
-  }
-
   get firstNameInput() {
     return $("#first-name");
   }
@@ -28,10 +23,6 @@ class CheckoutPage extends BasePage {
 
   get errorMessage() {
     return $('[data-test="error"]');
-  }
-
-  async proceedToCheckout() {
-    await this.checkoutButton.click();
   }
 
   async fillCheckoutInfo(firstName, lastName, postalCode) {
