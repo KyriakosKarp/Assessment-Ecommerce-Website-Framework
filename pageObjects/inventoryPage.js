@@ -82,6 +82,10 @@ class InventoryPage extends BasePage {
     await this.sortDropdown.selectByVisibleText("Name (A to Z)");
   }
 
+  async sortByNameZToA() {
+    await this.sortDropdown.selectByVisibleText("Name (Z to A)");
+  }
+
   async sortByPriceLowToHigh() {
     await this.sortDropdown.selectByVisibleText("Price (low to high)");
   }

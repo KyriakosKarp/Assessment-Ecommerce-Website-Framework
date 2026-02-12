@@ -21,9 +21,9 @@ describe("Item Details - Cross Page State Consistency", () => {
   it("Should maintain consistent item state across navigation layers", async () => {
     // Capture item data from inventory
     const names = await InventoryPage.getItemNames();
-    const inventoryItemTitle = names[0]
+    const inventoryItemTitle = names[0];
     const prices = await InventoryPage.getItemPrices();
-    const inventoryItemPrice = prices[0]
+    const inventoryItemPrice = prices[0];
 
     // Navigate to item details
     await InventoryPage.clickFirstItem();
@@ -61,11 +61,6 @@ describe("Item Details - Cross Page State Consistency", () => {
 
     const cartItemTitle = await CartPage.getFirstItemTitle();
     const cartItemPrice = await CartPage.getFirstItemPrice();
-
-    //   const names = await InventoryPage.getItemNames();
-    // const inventoryItemTitle = names[0]
-    // const prices = await InventoryPage.getItemPrices();
-    // const inventoryItemPrice = prices[0]
 
     expect(cartItemTitle).toBe(inventoryItemTitle);
     expect(cartItemPrice).toBe(inventoryItemPrice);

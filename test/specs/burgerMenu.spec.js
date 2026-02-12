@@ -47,8 +47,7 @@ describe("Burger Menu", () => {
     await BurgerMenu.open();
     await BurgerMenu.logout();
 
-    const url = await browser.getUrl();
-    expect(url).toContain("/");
+    await expect(LoginPage.usernameInput).toBeDisplayed();
   });
 
   it("Should reset app state via burger menu", async () => {

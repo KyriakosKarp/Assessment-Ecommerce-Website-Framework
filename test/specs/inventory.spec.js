@@ -27,6 +27,15 @@ describe("Inventory page", () => {
     expect(names).toEqual(sorted);
   });
 
+  it("Should sort products alphabetically from Z to A", async () => {
+    await InventoryPage.sortByNameZToA();
+
+    const names = await InventoryPage.getItemNames();
+    const sorted = [...names].sort().reverse();
+
+    expect(names).toEqual(sorted);
+  });
+
   it("Should sort products by price from low to high", async () => {
     await InventoryPage.sortByPriceLowToHigh();
 
