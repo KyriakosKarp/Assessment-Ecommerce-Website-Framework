@@ -48,13 +48,15 @@ npm install
 ## Allure Reporting
 
 ### Generate & open report locally
-    npm run test:all
-    npm run report
+    npm run test:report         # Run full suite and generate Allure report
 ### Available report scripts
     npm run report:clean        # Remove previous allure results & report
     npm run report:generate     # Generate report from allure results
     npm run report:open         # Open generated report
-    npm run report              # Clean + generate + open
+    npm run report              # Generate + open
+
+Note: `npm run report` requires existing `allure-results`.
+Use `npm run test:report` for a full clean execution.
 
 ---
 
@@ -142,8 +144,15 @@ The goal was to validate behavioral integrity across navigation layers rather th
 
 ### Reset App State Behavior
 
-Resetting the application clears the cart badge but does not revert inventory button from "Remove" back to "Add to cart".
+Resetting the application clears the cart badge but does not revert inventory button from **"Remove"** back to **"Add to cart"**.
 Handled via explicit cart cleanup logic to prevent state leakage between tests.
+
+### Cart State Is Not User-Isolated
+
+Adding an item to cart and logging out without using **Reset App State** keeps the item in the cart for other users.
+
+This indicates that cart state is not fully user-isolated and may persist across sessions.
+Handled via explicit cart cleanup logic to prevent stake leakage between tests.
 
 ---
 
