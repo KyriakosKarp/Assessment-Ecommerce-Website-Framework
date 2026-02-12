@@ -23,6 +23,12 @@ exports.config = {
         ],
       },
     },
+    {
+      browserName: "firefox",
+      "moz:firefoxOptions": {
+        args: ["-headless"],
+      },
+    },
   ],
 
   logLevel: "info",
@@ -55,6 +61,10 @@ exports.config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 60000,
+  },
+
+  before: async function () {
+    await browser.setWindowSize(1920, 1080);
   },
 
   afterTest: async function (test, context, { error }) {

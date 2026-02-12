@@ -79,6 +79,18 @@ CommonJS was chosen for simplicity and alignment with WebdriverIO configuration.
 
 A fixed viewport ensures deterministic UI rendering and prevents responsive layout flakiness in CI environments.
 
+### Cross-Browser Execution & Viewport Strategy
+
+The suite executes against both Chrome and Firefox in headless mode.
+
+A fixed viewport of 1920x1080 is enforced via the WebdriverIO `before` hook to guarantee:
+
+- Deterministic rendering across local and CI environments
+- Elimination of layout-related flakiness
+- Consistent visual behavior independent of OS defaults
+
+This decision prioritizes test reliability and CI stability over full responsive coverage.
+
 ### Page Object Model with Components
 
 Pages represent full screens, while reusable UI elements (e.g. Header, Burger Menu) are implemented as components to maintain separation of concerns and scalability.

@@ -27,6 +27,9 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
 
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@v1
+
       - name: Run WebdriverIO tests
         run: npm run test:all
 
