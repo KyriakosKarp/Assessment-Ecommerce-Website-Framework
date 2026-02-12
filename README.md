@@ -1,5 +1,7 @@
 # E2E Automation Framework – SauceDemo
 
+[![E2E Test Pipeline](https://github.com/KyriakosKarp/Assessment-Ecommerce-Website-Framework/actions/workflows/ci.yml/badge.svg)](https://github.com/KyriakosKarp/Assessment-Ecommerce-Website-Framework/actions/workflows/ci.yml)
+
 End-to-end automation framework built with **WebdriverIO v9**, **Mocha (BDD)** and **JavaScript (CommonJS)**.
 
 The framework validates:
